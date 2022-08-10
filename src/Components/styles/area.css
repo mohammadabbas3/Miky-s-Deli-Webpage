@@ -1,0 +1,107 @@
+.select__area-modal {
+  margin-top: 10rem !important;
+}
+
+.select__area-content h2 {
+  /* margin: 1rem; */
+  color: #df2020;
+  margin-bottom: 1.5rem;
+}
+
+.select-box {
+  display: flex;
+  /* width: 400px; */
+  flex-direction: column;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: auto;
+  font-family: inherit;
+}
+
+.select-box .options-container {
+  background: #f5f6fa;
+  color: #2f3640;
+
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  border: none;
+  overflow: hidden;
+  font-family: inherit;
+  order: 1;
+}
+
+.selected {
+  background: #f5f6fa;
+  color: #2f3640;
+  border-radius: 8px;
+  margin-bottom: 8px;
+
+  position: relative;
+
+  order: 0;
+}
+
+.selected::after {
+  content: "";
+  background: url("../../images/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 100%;
+  width: 1rem;
+  right: 12px;
+  top: 20px;
+
+  transition: all 0.3s;
+}
+
+.select-box.active .options-container {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.select-box.active .options-container + .selected::after {
+  transform: rotateX(180deg);
+  top: -20px;
+}
+
+/* .select-box .options-container::-webkit-scrollbar {
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+  }*/
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  /* background: #525861; */
+  border-radius: 0 3px 5px 0;
+}
+
+.select-box .option,
+.selected {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.select-box .option:hover {
+  background: #959596;
+  color: #ffff;
+}
+
+.select-box label {
+  cursor: pointer;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+
+.select__area-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+  font-size: 2rem;
+}

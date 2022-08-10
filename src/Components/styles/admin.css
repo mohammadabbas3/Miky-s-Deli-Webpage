@@ -1,0 +1,55 @@
+.table {
+  margin-top: 4rem;
+}
+
+th {
+  text-align: center;
+}
+
+.addItemContainer .newItem {
+  color: #ffff;
+  border-radius: 0.5rem;
+  padding:0.5rem 1.5rem;
+  font-family: inherit;
+  background:#df2020;
+  width: 25rem;
+}
+
+.addItemContainer .newItem:hover {
+  background-color:#139652;
+  color: #ffff;
+  transition: all ease-in-out 100ms;
+}
+
+
+.total h6 {
+  color: #139652;
+}
+
+.cart__img-box {
+  width: 80px;
+}
+
+.cart__img-box img {
+  width: 100%;
+}
+
+.cart__item-del i {
+  cursor: pointer;
+}
+
+.cart__page-btn button a:hover {
+  color: #fff;
+}
+
+.cart__subtotal {
+  color: #df2020;
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  th,
+  td {
+    font-size: 0.8rem;
+  }
+}

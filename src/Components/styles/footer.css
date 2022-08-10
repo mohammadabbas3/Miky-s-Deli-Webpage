@@ -1,129 +1,171 @@
-@import url("https://fonts.googleapis.com/css2?family=Istok+Web&display=swap"); 
-
+@import url("https://fonts.googleapis.com/css2?family=Istok+Web&display=swap");
 .footer {
-    padding-top: 5.5rem;
-    padding-bottom: 30px;
-    background: #e01f25;
-    color: #fff;
-  }
+  padding-top: 5.5rem;
+  padding-bottom: 5px;
+  background: #e01f25;
+  color: #fff;
+  height: 100%;
+  /* cursor: pointer; */
+}
 
-  .footer-col{
-    padding-right: 3.5rem;
-    
-  }
-  hr{
-    width: 60%;
-  }
-  .about-us-hr{
-    width: 60% !important;
-    
-  }
+.footer-col {
+  padding-right: 3.5rem;
+}
+hr {
+  width: 60%;
+}
 
-  .follow-icons{
-    margin-bottom: 2rem;
-    border: 1px solid blue;
-  }
+.follow-icons {
+  margin-bottom: 2rem;
+  border: 1px solid blue;
+}
 
-  .footer__logo img {
-    width: calc(100% - 50%);
-    margin: 5px;
-    
-  }
+.map__container {
+  padding-bottom: 30px;
+  border: 1px solid salmon;
+  /* min-height: 100%; */
+  /* max-height: 100%; */
+  /* max-width: 100%; */
+  height: 100%;
+  overflow: hidden;
+}
+
+.map{
+  border: 1px solid yellow;
+  height: 100%;
+  width: 100%;
+}
+
+.branches-item, .services-item {
+  background: transparent !important;
+}
+.services-item a{
+  text-decoration: none;
+  outline: none;
+}
+.branches-item span, .services-item span {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #ffffff;
   
-  .footer__logo h5{
-    padding: 20px 0;
-    color: #fff;
-  }
-  
-  .branches-item {
-    background: transparent !important;
-  }
-  
+}
+.services-item span:hover{
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.branches-item p {
+  color: #e5e5f7;
+  font-size: 0.8rem;
+}
+
+.branches-item img {
+  width: 10rem;
+  margin-top: 5rem;
+  height: 10rem;
+}
+.follow-icons ul a {
+  color: #ffff;
+  padding: 0px 10px;
+  font-size: 1.5rem;
+}
+
+.follow-icons {
+  background-color: transparent !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.socials{
+  display: flex;
+  justify-content: space-between;
+  /* width: 60%; */
+  align-items: center;
+  /* border: 1px solid pink; */
+}
+
+.follow-icons h4 {
+  color: white;
+}
+
+.icon .facebook{
+  margin-left: 0;
+}
+.socials a .icon:hover {
+ 
+  transform: scale(1.2);
+}
+
+
+
+
+
+/* .available-text img, .freeDelivery img {
+  max-width: 2rem;
+  height: 2rem;
+  margin: 0;
+} */
+/* .available-text, .freeDelivery {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: row;
+  min-height: 2rem;
+} */
+
+.copyright {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.copyrightContainer {
+  border-top: 1px solid rgb(180, 179, 179);
+margin-top: 4rem;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+.copyrightContainer p {
+  font-size: 0.8rem;
+}
+
+@media only screen and (max-width: 768px) {
   .branches-item span {
-    font-weight: 400;
-    font-size: 1rem;
-    color: #ffffff;
-  }
-  
-  .branches-item p {
-    color: #e5e5f7;
     font-size: 0.8rem;
   }
 
-  .branches-item img{
-    width: 10rem;
-    margin-top: 5rem;
-    height: 10rem;
+  .footer-col {
+    margin-top: 10px;
   }
-  .branches-item ul a {
-    color: #ffff;
-    padding: 0px 10px;
-    font-size: 1.5rem;
-  }
-  
-  
-  
-  .about-us {
-    padding: 5px;
-    margin-top: 90px;
-    width: 20rem !important;
-    height: 23rem;
-    /* border: 1px solid #212245; */
-    border-radius: 5px;
-    /* display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer; */
-  }
-  
+
  
-  
- 
-  
-  @media only screen and (max-width: 768px) {
-    
-  
-    .branches-item span {
-      font-size: 0.8rem;
-    }
 
-    .footer-col{
-      margin-top: 10px;
-    }
-
-    .about-us{
-      margin-top: 10px;
-    }
-  
-    .branches-item p {
-      font-size: 0.7rem;
-      /* margin-bottom: 0; */
-    }
+  .branches-item p {
+    font-size: 0.7rem;
+    /* margin-bottom: 0; */
   }
-  
-  @media only screen and (max-width: 576px) {
-    .copyright__text {
-      text-align: center;
-    }
+}
 
-    .footer-col{
-      margin-top: 10px;
-    }
-
-    .about-us{
-      margin-top: 10px;
-    }
-  
-    .social__links p {
-      font-size: 0.8rem;
-    }
-  
-    .social__links span {
-      padding: 4px;
-    }
-    .social__links span a {
-      font-size: 0.7rem;
-    }
-
-
+@media only screen and (max-width: 576px) {
+  .copyright__text {
+    text-align: center;
   }
+
+  .footer-col {
+    margin-top: 10px;
+  }
+
+  
+  .social__links p {
+    font-size: 0.8rem;
+  }
+
+  .social__links span {
+    padding: 4px;
+  }
+  .social__links span a {
+    font-size: 0.7rem;
+  }
+}

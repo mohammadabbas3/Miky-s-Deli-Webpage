@@ -1,5 +1,5 @@
 h5{
-  color: #FF0000;
+  color: #e01f25;
 }
 
 h6{
@@ -19,16 +19,18 @@ h6{
     height: 80px;
     border: none;
     border-radius: 50%;
-    background: #FF0000;
+    background: #e01f25;
     display: flex;
     justify-content: center;
     align-items: center;
+    
     
   }
 
   .category__img img{
     height: 50px;
     width: 50px;
+    color: #ffffff;
   }
 
   

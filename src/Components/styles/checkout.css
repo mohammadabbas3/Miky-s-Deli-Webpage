@@ -1,0 +1,82 @@
+.checkout__bill {
+  background: #fde4e4;
+  padding: 30px;
+}
+
+.checkout__total {
+  border-top: 1px solid #ddd;
+  padding-top: 30px;
+}
+
+.input-label {
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 1.3rem;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form__group input {
+  width: 100%;
+  background: transparent;
+  padding: 7px 20px;
+  border: none;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(33, 34, 69, 0.2980392156862745);
+  font-family: inherit;
+}
+
+.form__group input:focus {
+  outline: none;
+}
+
+.nested-section {
+  box-sizing: border-box;
+
+  /* border: 1px solid #e2e2e2; */
+  padding: 1rem 2rem;
+  color: rgba(0, 0, 0, 0.8);
+  /* margin: 1rem 0 3rem; */
+  /* box-shadow: 0 2px 4px 0 rgb(0 0 0 / 7%); */
+}
+.step-actions .button {
+  width: 300px;
+  font-family: inherit;
+}
+
+.btn-primary,
+.btn-primary:focus {
+  color: #fff;
+  background-color: #139652 !important;
+  border-color: #139652 !important;
+}
+
+.btn-outline-primary {
+  color: #139652 !important;
+  border-color: #139652 !important;
+}
+.btn-outline-primary:hover {
+  color: #fff !important ;
+  background-color: #139652 !important;
+}
+
+.checkout__modal {
+  margin-top: 8rem !important;
+}
+.checkout__modal-content img {
+  width: 6.25rem;
+  margin-top: -50px;
+  box-shadow: 0 2px 5px rgba(0 0 0 0.2);
+}
+.checkout__modal-btn{
+  width: 100%;
+
+  box-shadow: 0 5px 5px rgba(0, 0,0, 0.2);
+}
+@media only screen and (max-width: 768px) {
+  .checkout__bill h6 {
+    font-size: 0.9rem;
+  }
+  .checkout__bill {
+    margin-top: 40px;
+  }
+}

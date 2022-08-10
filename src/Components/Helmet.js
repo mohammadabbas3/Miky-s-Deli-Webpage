@@ -1,8 +1,9 @@
 import React from "react";
+import '../Components/styles/helmet.css'
 
 const Helmet = (props) => {
-  document.title = "Food ordering app -" + props.title;
-  return <div className="w-100">{props.children}</div>;
+  document.title = "Miky's Deli Restaurant -" + props.title;
+  return <div className="helmet w-100">{props.children}</div>;
 };
 
 export default Helmet;
