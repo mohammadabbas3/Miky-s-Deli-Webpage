@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "../pages/Home";
 import Menu from "../pages/Menu";
-// import productDesc from "../pages/ProductDesc";
+
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Contact from "../pages/Contact";
@@ -18,8 +18,6 @@ const Routers = () => {
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/menu" element={<Menu />} />
-      {/* <Route path="/productDesc" element={<ProductDesc />} /> */}
-      {/* <Route path="/foods/:id" element={<FoodDetails />} /> */}
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
       {/* <Route path="/login" element={<Login />} /> */}

@@ -1,7 +1,5 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
-
-
 import { motion } from "framer-motion";
 import { Box, Typography } from "@mui/material";
 import Cart from "../../pages/Cart";
@@ -9,7 +7,6 @@ import adminUser from "../../images/adminUser.png";
 import { Container, Button } from "reactstrap";
 import { Alert } from "reactstrap";
 // import Alert from 'react-bootstrap/Alert';
-
 import { IoIosCloseCircle } from "react-icons/io";
 import { IoCartSharp } from "react-icons/io5";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
@@ -22,7 +19,7 @@ import {
   signInWithPhoneNumber,
 } from "firebase/auth";
 import { app } from "../../firebase.config";
-// import Modal from '../../pages/Modal'
+
 
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
@@ -50,12 +47,8 @@ const nav__links = [
 ];
 
 const Header = () => {
-  
-
   const menuRef = useRef(null);
   const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
-
-  
 
   const autoFocusRef = useRef(null);
 
