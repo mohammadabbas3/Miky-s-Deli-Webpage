@@ -3,23 +3,29 @@ import Helmet from "../Components/Helmet";
 import { Container, Row, Col, Button, Form } from "reactstrap";
 import { useStateValue } from "../context/StateProvider";
 import { Link } from "react-router-dom";
+import { IoMdArrowDropdown } from "react-icons/io";
 import { motion } from "framer-motion";
 import "../Components/styles/checkout.css";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
 import TickImg from "../images/tick.png";
+import Area from "../pages/Area"
+
 
 const Checkout = () => {
   const [enterName, setEnterName] = useState("");
   const [enterEmail, setEnterEmail] = useState("");
+  const [street, setStreet] = useState("");
+  const [buildingNo, setBuildingNo] = useState("");
   const [{ user }] = useStateValue();
-  const [modal, setModal] = useState(false);
+  const [modalConfirm, setModalConfirm] = useState(false);
 
-  const toggle = () => setModal(!modal);
+  const toggleConfirm = () => setModalConfirm(!modalConfirm);
 
   return (
     <Helmet title="Checkout">
       <section>
         <container>
+          <p>image goes here</p>
           <img src="" />
         </container>
       </section>
@@ -47,7 +53,7 @@ const Checkout = () => {
                     onChange={(e) => setEnterEmail(e.target.value)}
                   />
                 </div>
-
+                
                 <div className="form__group">
                   <input
                     type="text"
@@ -55,17 +61,24 @@ const Checkout = () => {
                     placeholder={user.phoneNumber}
                     // disabled
                     // className="form-control custom-input mt-2"
-
+                    value=""
                     // onChange={(e) => setEnterNumber(e.target.value)}
                   />
                 </div>
+                
 
-                {/* address */}
-                {/* <div className="nested-section d-block"> */}
                 <h4 className="mt-4 mb-4">Add Address</h4>
                 <label class="input-label bold mb-0">Pin Exact Location</label>
                 <div>Map</div>
                 <Button>Add your current location</Button>
+
+                <div className="form__group">
+                  <div className=" my-4 deliveryZone">
+                    <h2>Delivery Zone</h2>
+                    <button className="btnArea" onClick={<Area/>}><IoMdArrowDropdown/></button>
+                    
+                  </div>
+                </div>
                 <div class="form-group mb-4">
                   <label class="input-label bold mb-0">
                     Street No. <span class="text-danger">*</span>
@@ -75,7 +88,7 @@ const Checkout = () => {
                     type="text"
                     required=""
                     class="form-control custom-input mt-2"
-                    value=""
+                    onChange={(e) => setStreet(e.target.value)}
                   />
                 </div>
                 <div className="form-group mb-4">
@@ -87,7 +100,7 @@ const Checkout = () => {
                     type="text"
                     required=""
                     className="form-control custom-input mt-2"
-                    value=""
+                    onChange={(e) => setBuildingNo(e.target.value)}
                   />
                 </div>
                 <div className="form-group mb-4">
@@ -98,21 +111,18 @@ const Checkout = () => {
                     name="address_3"
                     type="text"
                     className="form-control custom-input mt-2"
-                    value=""
                   />
                 </div>
                 <div className="form-group mb-4">
                   <label className="input-label bold mb-0">
-                    Street No. &amp; Nearest Landmark <span>(Optional)</span>
+                    Nearest Landmark <span>(Optional)</span>
                   </label>
                   <input
                     name="address_4"
                     type="text"
                     className="form-control custom-input mt-2"
-                    value=""
                   />
                 </div>
-                {/* </div> */}
 
                 {/*--------- payment ------ */}
                 <div className="paymentSection">
@@ -158,28 +168,38 @@ const Checkout = () => {
                   <motion.button
                     whileTap={{ scale: 0.8 }}
                     class="button btn btn-primary mx-1"
-                    onClick={toggle}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleConfirm();
+                    }}
+                    disabled={
+                      enterName === "" ||
+                      enterEmail === "" ||
+                      street === "" ||
+                      buildingNo === ""
+                        ? true
+                        : false
+                    }
                   >
                     Confirm Order
                   </motion.button>
 
                   <Modal
                     className="checkout__modal"
-                    isOpen={modal}
-                    toggle={toggle}
+                    isOpen={modalConfirm}
+                    toggle={toggleConfirm}
                   >
-                    
                     <ModalBody className="checkout__modal-content text-center">
                       <img src={TickImg} alt=" Green Tick" />
                       <h2>Thank You!</h2>
                       <p>Your order is Comfirmed</p>
-                      <Button
+                      {/* <Button
                         className="checkout__modal-btn"
                         color="primary"
-                        onClick={toggle}
+                        onClick={toggleConfirm}
                       >
                         OK
-                      </Button>{" "}
+                      </Button>{" "} */}
                     </ModalBody>
                   </Modal>
                 </div>

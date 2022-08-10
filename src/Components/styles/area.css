@@ -1,5 +1,6 @@
 .select__area-modal {
   margin-top: 10rem !important;
+  cursor: pointer;
 }
 
 .select__area-content h2 {
@@ -59,6 +60,11 @@
   transition: all 0.3s;
 }
 
+.options-container.active {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+}
 .select-box.active .options-container {
   max-height: 240px;
   opacity: 1;
@@ -70,17 +76,6 @@
   top: -20px;
 }
 
-/* .select-box .options-container::-webkit-scrollbar {
-    width: 8px;
-    background: #0d141f;
-    border-radius: 0 8px 8px 0;
-  }*/
-
-.select-box .options-container::-webkit-scrollbar-thumb {
-  /* background: #525861; */
-  border-radius: 0 3px 5px 0;
-}
-
 .select-box .option,
 .selected {
   padding: 12px 24px;
@@ -88,7 +83,7 @@
 }
 
 .select-box .option:hover {
-  background: #959596;
+  background: #24965a;
   color: #ffff;
 }
 
@@ -103,5 +98,5 @@
 .select__area-btn {
   margin-top: 1.5rem;
   width: 100%;
-  font-size: 2rem;
+  
 }

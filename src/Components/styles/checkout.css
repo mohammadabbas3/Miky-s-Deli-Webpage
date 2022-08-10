@@ -29,6 +29,25 @@
   outline: none;
 }
 
+.deliveryZone{
+  max-width: 100%;
+  min-width: 50%;
+  border: 0.5px solid gray;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  background-color: rgb(243, 243, 243);
+}
+
+.btnArea{
+  border: none;
+  background: transparent;
+  font-size: 2rem;
+}
+
 .nested-section {
   box-sizing: border-box;
 

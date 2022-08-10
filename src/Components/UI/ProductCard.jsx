@@ -12,7 +12,7 @@ const ProductCard = () => {
 
   return (
     <div className="card mb-4" style={{ width: "15rem" }}>
-      <img className="card-img-top mt-2" src={Saffron} alt="Card image cap" />
+      <img className="card-img-top mt-2" src={Saffron} alt="product image" />
       <div className="card-body">
         <h5 className="card-title">Miky's Special Pizza</h5>
         <p className="card-text">

@@ -3,44 +3,51 @@ import { Modal, ModalBody } from "reactstrap";
 import { Button } from "reactstrap";
 import "../Components/styles/area.css";
 
-
-
-
 const Area = () => {
-
-
   const [modal, setModal] = useState(true);
   const toggle = () => setModal(!modal);
-    const [value, setValue] = useState("default");
+  const [value, setValue] = useState("Select area for delivery");
 
   const toggleActive = (event) => {
     event.currentTarget.classList.toggle("active");
-   
   };
 
+  const selectOption = (e) => {
+    setValue(e.target.textContent);
+    e.currentTarget.parent.classList.remove("active");
+  };
 
-
+  const options = [
+    "Al Saad",
+    "Al Bidda",
+    "The Pearl",
+    "Khairayat",
+    "Al Duhail",
+    "Al Garafa",
+    "Al Markhiya",
+    "Katara",
+    "Al Mamoura",
+    "Abu Hamour",
+    "Dafna",
+  ];
 
   return (
-    <Modal className="select__area-modal" isOpen={modal} toggle={toggle}>
+    <Modal
+      className="select__area-modal"
+      isOpen={modal}
+      toggle={toggle}
+      keyboard="false"
+      backdrop="static"
+    >
       <ModalBody className="select__area-content text-center">
         <h2>Select your delivery area</h2>
         <div className="select-box" onClick={toggleActive}>
-          {/* <div className={`options-container ${toggleClassCheck}`} onClick={toggleActive}> */}
-          <button className="options-container" onClick={toggleActive}>
-            <div className="option">
-              <input
-                type="radio"
-                className="radio"
-                id="automobiles"
-                name="category"
-              />
-              <label for="automobiles">Ain khalid</label>
-            </div>
-
-            <div className="option" value={"Al Saad"} onClick={toggleActive}>
+          <button className="options-container">
+            <div className="option" onClick={toggleActive}>
               <input type="radio" className="radio" id="film" name="category" />
-              <label for="Al Saad">Al Saad</label>
+              <label for="Al Saad" onClick={selectOption}>
+                Al Saad
+              </label>
             </div>
 
             <div className="option" onClick={toggleActive}>
@@ -50,12 +57,16 @@ const Area = () => {
                 id="science"
                 name="category"
               />
-              <label for="Al Bidda">Al Bidda</label>
+              <label for="Al Bidda" onClick={selectOption}>
+                Al Bidda
+              </label>
             </div>
 
             <div className="option" onClick={toggleActive}>
               <input type="radio" className="radio" id="art" name="category" />
-              <label for="The Pearl">The Pearl</label>
+              <label for="The Pearl" onClick={selectOption}>
+                The Pearl
+              </label>
             </div>
 
             <div className="option" onClick={toggleActive}>
@@ -65,7 +76,9 @@ const Area = () => {
                 id="music"
                 name="category"
               />
-              <label for="Khairatyat">Khairatyat</label>
+              <label for="Khairatyat" onClick={selectOption}>
+                Khairatyat
+              </label>
             </div>
 
             <div className="option" onClick={toggleActive}>
@@ -75,7 +88,9 @@ const Area = () => {
                 id="travel"
                 name="category"
               />
-              <label for="Al Duhail">Al Duhail</label>
+              <label for="Al Duhail" onClick={selectOption}>
+                Al Duhail
+              </label>
             </div>
 
             <div className="option" onClick={toggleActive}>
@@ -85,7 +100,9 @@ const Area = () => {
                 id="sports"
                 name="category"
               />
-              <label for="Al Garafa">Al Garafa</label>
+              <label for="Al Garafa" onClick={selectOption}>
+                Al Garafa
+              </label>
             </div>
 
             <div className="option" onClick={toggleActive}>
@@ -100,7 +117,9 @@ const Area = () => {
                 id="tutorials"
                 name="category"
               />
-              <label for="Katara">Katara</label>
+              <label for="Katara" onClick={selectOption}>
+                Katara
+              </label>
             </div>
             <div className="option" onClick={toggleActive}>
               <input
@@ -118,7 +137,9 @@ const Area = () => {
                 id="tutorials"
                 name="category"
               />
-              <label for="Abu Hamour">Abu Hamour</label>
+              <label for="Abu Hamour" onClick={selectOption}>
+                Abu Hamour
+              </label>
             </div>
             <div className="option" onClick={toggleActive}>
               <input
@@ -127,15 +148,22 @@ const Area = () => {
                 id="tutorials"
                 name="category"
               />
-              <label for="Dafna">Dafna</label>
+              <label for="Dafna" onClick={selectOption}>
+                Dafna
+              </label>
             </div>
           </button>
 
-          <div className="selected" value="default">
-            Select Video Category
+          <div className="selected" onChange={selectOption}>
+            {value}
           </div>
         </div>
-        <Button className="select__area-btn" color="primary" onClick={toggle}>
+        <Button
+          className="select__area-btn"
+          disabled={value === "Select Video Category" ? true : false}
+          color="primary"
+          onClick={toggle}
+        >
           OK
         </Button>{" "}
       </ModalBody>
