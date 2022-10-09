@@ -1,0 +1,20 @@
+.dashboard__banner{
+    background: url(../../images/homeBanner.jpg);
+   
+    height: 100%;
+    width: 100%;
+}
+
+.dashboard__banner .banner{
+    background-color: #6f706f9a !important;
+}
+
+.dashboard__banner h3{
+    color: rgb(138, 135, 135);
+    padding-bottom: 0.9rem;
+}
+
+main{
+    display: flex;
+    flex-direction: row !important;
+}

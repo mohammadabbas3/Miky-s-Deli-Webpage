@@ -1,0 +1,84 @@
+{
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Miky's Deli Pearl Qatar",
+          "description": "An Italian restaurant located in the heart of Pearl."
+        },
+        "geometry": {
+          "coordinates": [51.55157, 25.36877],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Miky's Deli Lusail",
+          "description": "Enjoy drive-in or drive-through dining at Lusail Marina Food Arena"
+        },
+        "geometry": {
+          "coordinates": [51.52670221349445, 25.391711194398933],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Miky's Deli, Duhail Destination Box",
+          "description": "Showstopper of one of the largest food parks in Qatar. Open 24/7"
+        },
+        "geometry": {
+          "coordinates": [51.467748923142956,  25.375330563335297],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Miky's Deli at Qatar Sports Club",
+          "description": "Miky's Deli Italian Restaurant at Qatar Sports Club."
+        },
+        "geometry": {
+          "coordinates": [51.51253576855366,25.31859760530991],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Miky's Deli, Royal Plaza",
+          "description": "Miky's Deli at Royal Plaza Mall, Doha Qatar.",
+          "phoneNumbers":["334455665","33442233"]
+        },
+        "geometry": {
+          "coordinates": [51.50163714232963, 25.281844668780774],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Miky's Deli, Aspire Zone",
+          "description": "Find us At Aspire."
+        },
+        "geometry": {
+          "coordinates": [ 51.432848882047196,25.267374887216164],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Miky's Deli, Gulf Mall",
+          "description": "Visit Us at Gulf mall in your neighborhood."
+        },
+        "geometry": {
+          "coordinates": [ 51.52280890184627,25.27302750476852],
+          "type": "Point"
+        }
+      }
+
+    ],
+    "type": "FeatureCollection"
+  }

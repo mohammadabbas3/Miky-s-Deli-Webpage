@@ -1,7 +1,9 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Menu, MenuItem } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import { PersonOutline } from "@mui/icons-material";
 import Cart from "../../pages/Cart";
 import adminUser from "../../images/adminUser.png";
 import { Container, Button } from "reactstrap";
@@ -20,7 +22,6 @@ import {
 } from "firebase/auth";
 import { app } from "../../firebase.config";
 
-
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 
@@ -36,13 +37,17 @@ const nav__links = [
     display: "Menu",
     path: "/menu",
   },
+  {
+    display: "Catering Services",
+    path: "/services",
+  },
   // {
-  //   display: "Cart",
-  //   path: "/cart",
+  //   display: "Contact",
+  //   path: "/contact",
   // },
   {
-    display: "Contact",
-    path: "/contact",
+    display: "Find Us",
+    path: "/map",
   },
 ];
 
@@ -52,19 +57,21 @@ const Header = () => {
 
   const autoFocusRef = useRef(null);
 
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, cartItems }, dispatch] = useStateValue();
   const [isLogoutMenu, setIsLogoutMenu] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("+974 ");
   const [OTP, setOTP] = useState("");
   const [expandForm, setExpandForm] = useState(false);
   const [cartMenu, setCartMenu] = useState(false);
-  const [visible, setVisible] = useState(false);
-  // const [otpContainer, setOtpContainer] = useState(false);
 
-  const toggleAlert = () => setVisible(!visible);
+  const [error, setError] = useState(null);
+  const [loginStatus, setLoginStatus] = useState("");
+  const [fields, setFields] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(false);
+  // const [profile, setProfile] = useState(null)
+  const open = Boolean(anchorEl);
 
   const firebaseAuth = getAuth(app);
-  //  const provider = new GoogleAuthProvider();
 
   const requestOTP = (e) => {
     e.preventDefault();
@@ -90,31 +97,28 @@ const Header = () => {
         });
     } else {
       console.log("enter phone number");
-      alert("enter phone number");
-      <Alert color="primary" isOpen={visible} toggle={toggleAlert}>
-        Hey! Pay attention.
-      </Alert>;
+      setError("enter phone number");
+      setLoginStatus("danger");
+      setFields(true);
+      setTimeout(() => {
+        setFields(false);
+      }, 4000);
     }
   };
 
   const toggleModal = () => {
-    // if(!user){
-    //   try{
-    //     const {user : { refreshToken, providerData }} = await signInWithPopup(firebaseAuth, provider)
-    //     // console.log(response)
-    //     dispatch({
-    //       type: actionType.SET_USER,
-    //       user: providerData[0]
-    //     })
-    //     localStorage.setItem('user', JSON.stringify(providerData[0]));
-    //   }
-    //     catch (error){
-    //       console.log(error.message)
-    //     }
-    // }
     {
       !user && setIsLogoutMenu(!isLogoutMenu);
     }
+  };
+
+  const handleClose = () => {
+    setAnchorEl(!anchorEl);
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setAnchorEl(!anchorEl);
   };
 
   const logout = () => {
@@ -132,7 +136,6 @@ const Header = () => {
 
   const verifyOTP = (e) => {
     let otp = e.target.value.replace(/[a-zA-Z<>,./!@#$%^&*()_"';:\|?/=-]/, "");
-    // let otp = e.target.value;
     otp.length <= 6 && setOTP(otp);
     if (otp.length === 6) {
       // console.log(otp)
@@ -147,26 +150,27 @@ const Header = () => {
             user: user.providerData[0],
           });
           localStorage.setItem("user", JSON.stringify(user.providerData[0]));
-          setIsLogoutMenu(false);
-          alert("You are Signed In. Order Now!!");
-          <Alert color="primary">You are Signed In Order Now!!</Alert>;
           console.log(user);
+
+          setIsLogoutMenu(false);
+          setFields(true);
+          setError("Signed in successfully");
+          setLoginStatus("success");
+          setTimeout(() => {
+            setFields(false);
+          }, 4000);
           // ...
         })
         .catch((error) => {
           // User couldn't sign in (bad verification code?)
           // ...
+          setFields(true);
           console.log(error);
+          setError("Invalid OTP");
+          setLoginStatus("danger");
         });
     }
   };
-
-  const [counter, setCounter] = React.useState(59);
-  React.useEffect(() => {
-    const timer =
-      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
-    return () => clearInterval(timer);
-  }, [counter]);
 
   return (
     <header className="header">
@@ -179,10 +183,10 @@ const Header = () => {
           {/* ======= menu ======= */}
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>
             <div className="menu d-flex align-items-center text-decoration-none gap-5">
-              {nav__links.map((item, index) => (
+              {nav__links.map((item, indx) => (
                 <NavLink
                   to={item.path}
-                  key={index}
+                  key={indx}
                   className={(navClass) =>
                     navClass.isActive ? "active__menu" : ""
                   }
@@ -201,8 +205,8 @@ const Header = () => {
                 style={{ color: "#38383a", fontSize: "1.5rem" }}
                 onClick={() => setCartMenu(!cartMenu)}
               />
-
-              <span className="cart__badge">2</span>
+              {cartItems && cartItems.length > 0 && <span className="cart__badge">{cartItems.length}</span>}
+              
             </span>
 
             <div className="signinBtn">
@@ -217,14 +221,67 @@ const Header = () => {
                   Sign In
                 </Button>
               ) : (
-                <Button
-                  style={{ display: "flex" }}
-                  direction="row-responsive"
-                  className="signout"
-                  onClick={logout}
+                // <div>
+                <Box
+                  component={IconButton}
+                  p={1.25}
+                  bgcolor="grey.200"
+                  onClick={handleClick}
                 >
-                  Sign Out
-                </Button>
+                  <PersonOutline
+                    // aria-controls={open ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    // aria-expanded={open ? "true" : undefined}
+                    // onClick={handleClick}
+                  />
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                    anchorReference="anchorPosition"
+                    anchorPosition={{ top: 60, left: 1150 }}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
+                    }}
+                  >
+                    <Link style={{textDecoration:"none", color:"unset", paddingX:"2rem"}} to="/dashboard/profileInfo">
+                      <MenuItem
+                        onClick={() => {
+                          handleClose();
+                        }}
+                      >
+                        Dashboard
+                      </MenuItem>
+                    </Link>
+                    {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        logout();
+                      }}
+                    >
+                      Sign out
+                    </MenuItem>
+                  </Menu>
+                </Box>
+                //<Button
+                // style={{ display: "flex" }}
+                //direction="row-responsive"
+                //className="signout"
+                // onClick={logout}
+                //>
+                //Sign Out
+                //</Button>
+                // {/* </div> */}
               )}
               {/* <Button style={{display:"flex"}} direction="row-responsive" className='signin' onClick= {toggleModal}>Sign In</Button> */}
 
@@ -254,21 +311,31 @@ const Header = () => {
                               if (e.target.value === "+974 ") {
                                 setExpandForm(false);
                               }
-
                               const experssion = e.target.value.replace(
                                 /[a-zA-Z<>,./!@#$%^&*()_"';:\|?/=-]/,
                                 ""
                               );
-
                               // setPhoneNumber(experssion)
                               {
                                 e.target.value.length <= 13 &&
                                   setPhoneNumber(experssion);
                               }
-
                               console.log(phoneNumber);
                             }}
                           />
+                          {fields && (
+                            <motion.p
+                              initial={{ opacity: 0, scale: 0.5 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0.5 }}
+                              // className="alertMsg"
+                              className={`alertMsg ${
+                                loginStatus === "danger" ? "danger" : "success"
+                              }`}
+                            >
+                              {error}
+                            </motion.p>
+                          )}
                         </div>
 
                         {expandForm === false && phoneNumber !== " " ? (
@@ -283,16 +350,12 @@ const Header = () => {
                         {/* {expandForm === true &&  */}
 
                         <div className=" otpContainer mt-4 text-center">
-                          Enter OTP
+                          {/* Enter OTP */}
                           <input
-                            type="text"
+                            type="password"
+                            placeholder="Enter the OTP"
                             maxLength={8}
                             value={OTP}
-                            ref={autoFocusRef}
-                            // onChange={()=> {
-                            //   autoFocusRef.current.focus()
-                            //   verifyOTP()
-                            // }}
                             onChange={verifyOTP}
                           />
                         </div>
@@ -302,47 +365,18 @@ const Header = () => {
                         {/* }  */}
                       </form>
                     </div>
-                    {/* {user && user.phoneNumber === "+97430271700" && (
-                      <div>
-                        <Link to={"/createItem"}>
-                          <button
-                            className="mt-3 btn newItem"
-                            onClick={toggleModal}
-                          >
-                            New Item{" "}
-                            <span>
-                              <MdAdd />
-                            </span>
-                          </button>
-                        </Link>
-
-                        <Link to="/admin">
-                          <button
-                            className="mt-3 btn newItem"
-                            onClick={toggleModal}
-                          >
-                            Admin Panel{" "}
-                            <span>
-                              <MdAdd />
-                            </span>
-                          </button>
-                        </Link>
-                      </div>
-                    )} */}
 
                     {expandForm === true && (
                       <Button
                         className="continue mt-4 text-center"
                         variant="danger"
                         type="submit"
+                        disabled={OTP === "" || fields === true ? true : false}
                         onClick={toggleModal}
                       >
                         Continue <BsFillArrowRightCircleFill />{" "}
                       </Button>
                     )}
-                    {/* <Button className="mt-4 text-center" onClick={logout}>
-                      Sign Out
-                    </Button> */}
                   </div>
                 </div>
               )}
@@ -359,7 +393,7 @@ const Header = () => {
             )}
 
             <span className="mobile__menu" onClick={toggleMenu}>
-              <i class="ri-menu-line"></i>
+              <i className="ri-menu-line"></i>
             </span>
 
             {cartMenu && (

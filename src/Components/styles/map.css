@@ -1,0 +1,42 @@
+.mapbox__map{
+    height: 33rem;
+    width: 100%;
+    display: block;
+}
+
+.map-container {
+    position: absolute;
+    height: 33rem;
+    top: 5rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .sidebarStyle {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 12px;
+    background-color: #404040;
+    color: #ffffff;
+    z-index: 1 !important;
+    padding: 6px;
+    font-weight: bold;
+  }
+
+  .marker {
+    background-image: url('../../images/locationMarker.png');
+    background-position: center;
+    background-size: contain;
+    /* border: 1px solid blue; */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50%;
+  }

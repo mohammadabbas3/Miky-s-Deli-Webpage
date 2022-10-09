@@ -7,6 +7,29 @@
   pointer-events: none;
 }
 
+/* .card-skeleton {
+  display: flex;
+  flex-direction: column;
+  
+  height: 20rem;
+  width: 14rem;
+  padding: 0.5rem;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.card-skeleton .top-section {
+  margin-right: 2rem;
+  height: 50%;
+  width: 14rem;
+  
+}
+.card-skeleton .bottom-section {
+  height: 50%;
+  width: 14rem;
+  
+} */
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

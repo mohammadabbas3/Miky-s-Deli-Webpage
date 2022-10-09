@@ -3,15 +3,16 @@
   align-items: center;
   justify-content: space-between;
   padding: 5px 15px;
-  height: 80px;
+  height: 70px;
   width: 100%;
   background: #fff;
+  /* background: #ff4646; */
   position: fixed;
-
+  
   top: 0;
   left: 0;
   z-index: 101;
-  box-shadow: 0px 3px 20px rgba(187, 253, 178, 0.6);
+  /* box-shadow: 0px 3px 20px rgba(187, 253, 178, 0.6); */
 }
 
 .logo {
@@ -70,18 +71,16 @@
   display: none;
 }
 
-/* .user img { */
-  /* width: 40px; */
-  /* height: 40px; */
-  /* cursor: pointer; */
-  /* border-radius: 9999px; */
-/* } */
-
 .signinBtn {
   /* border: 2px solid black; */
   width: 8rem;
   display: flex;
   justify-content: center;
+}
+
+.signinBtn a{
+  text-decoration: none;
+  color: unset;
 }
 
 .signout {
@@ -221,7 +220,7 @@
   box-shadow: 5px 4px 10px 5px rgb(228, 228, 228) inset;
   border-radius: 5px;
   border: none;
-  width: 7rem;
+  width: 10rem;
   padding: 0px 10px;
 }
 
@@ -404,6 +403,24 @@
   .continue {
     width: 7rem;
   }
+}
+
+.select-input-value .alertMsg {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  /* border: 1px solid red; */
+  color: #ffffff;
+}
+
+.danger {
+  background-color: #ff0000;
+}
+
+.success {
+  background-color: #139652;
 }
 
 /* .otpContainer{

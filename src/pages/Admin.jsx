@@ -9,7 +9,7 @@ const Admin = () => {
 
     const [{ user, cart }] = useStateValue();
   return (
-    <Helmet title="admin">
+    <Helmet title="Admin">
       <section>
         <Container>
           <Row>

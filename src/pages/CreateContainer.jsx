@@ -18,7 +18,9 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { saveItem } from "../firebaseFunctions";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
+import { saveItem, getAllMenuItems  } from "../firebaseFunctions";
 
 const categories = [
   {
@@ -28,8 +30,8 @@ const categories = [
   },
   {
     id: 2,
-    name: "Starter",
-    urlParamName: "starter",
+    name: "Appetizers",
+    urlParamName: "appetizers",
   },
   {
     id: 3,
@@ -38,13 +40,13 @@ const categories = [
   },
   {
     id: 4,
-    name: "Burger",
-    urlParamName: "burger",
+    name: "Burgers",
+    urlParamName: "burgers",
   },
   {
     id: 5,
-    name: "Pizza",
-    urlParamName: "pizza",
+    name: "Pizzas",
+    urlParamName: "pizzas",
   },
   {
     id: 6,
@@ -88,8 +90,13 @@ const categories = [
   },
   {
     id: 14,
-    name: "Desert",
-    urlParamName: "desert",
+    name: "Dessert",
+    urlParamName: "dessert",
+  },
+  {
+    id: 14,
+    name: "Fresh Juices",
+    urlParamName: "fresh juices",
   },
 ];
 
@@ -154,9 +161,15 @@ const meatOptions = [
 ];
 
 const CreateContainer = () => {
+  const [{menuItems}, dispatch] = useStateValue();
+
+
   const [title, setTitle] = useState("");
+  const [arabicTitle, setArabicTitle] = useState("")
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [varaitions, setVaraitions] = useState([]);
+
   const [category, setCategory] = useState(null);
   const [size, setSize] = useState(null);
   const [fields, setFields] = useState(false);
@@ -245,15 +258,16 @@ const CreateContainer = () => {
         const data = {
           id: `${Date.now()}`,
           title: title,
+          arabicTitle: arabicTitle,
           imageURL: imageAsset,
           category: category,
-
+          // varaitions:varaitions,
           description: description,
           qty: 1,
           price: price,
-          size: size,
-          addon: addon,
-          meatOption: meatOption,
+          // size: size,
+          // addon: addon,
+          // meatOption: meatOption,
         };
         saveItem(data);
         setIsLoading(false);
@@ -262,6 +276,7 @@ const CreateContainer = () => {
         setAlertStatus("success");
         setTimeout(() => {
           setFields(false);
+          setArabicTitle('')
         }, 4000);
 
         clearData();
@@ -276,6 +291,8 @@ const CreateContainer = () => {
         setIsLoading(false);
       }, 4000);
     }
+
+    fetchMenuItems();
   };
 
   const clearData = () => {
@@ -288,6 +305,17 @@ const CreateContainer = () => {
     setSize("Select Category");
     // setMeatOption("Select Category")
   };
+
+  const fetchMenuItems = async () => {
+    await getAllMenuItems().then(data => {
+      console.log(data);
+      dispatch({
+        type: actionType.SET_MENU_ITEMS,
+        menuItems: data,
+      })
+    });
+  };
+
 
   return (
     <Helmet tittle="CreateContainer">
@@ -325,10 +353,21 @@ const CreateContainer = () => {
                           className="titleInput"
                         />
                       </div>
+                      <div className="titleContainer">
+                        <MdFastfood />
+                        <input
+                          type="text"
+                          required
+                          value={arabicTitle}
+                          onChange={(e) => setArabicTitle(e.target.value)}
+                          placeholder="Give me a Arabic title..."
+                          className="titleInput"
+                        />
+                      </div>
                       <div className="categoryContainer">
                         <select
                           className="categorySelect"
-                          onChange={(e) => setCategory(e.target.value)}
+                          onChange={(e) => setCategory(e.target.value) }
                         >
                           <option value="other" className="bg-white">
                             Select Category

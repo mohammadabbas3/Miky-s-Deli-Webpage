@@ -1,109 +1,4 @@
-// import React from "react";
-// import "../Components/styles/cart.css";
-// import { motion } from "framer-motion";
-// import { MdOutlineKeyboardTab } from "react-icons/md";
-// import { RiRefreshFill } from "react-icons/ri";
-// import { BiMinus, BiPlus } from "react-icons/bi";
-// import { Link } from "react-router-dom";
-// import { useStateValue } from "../context/StateProvider";
-// import CartItem from "../pages/CartItem.jsx";
-// import { ListGroup } from "reactstrap";
-
-// const Cart = ({ cartMenu, setCartMenu }) => {
-//   const [{ user }] = useStateValue();
-
-//   return (
-//     <motion.div
-//       initial={{ opacity: 0, x: 200 }}
-//       animate={{ opacity: 1, x: 0 }}
-//       exit={{ opacity: 0, x: 200 }}
-//       className="cartContainer"
-//     >
-//       <div className="cartHeader">
-//         <motion.div whileTap={{ scale: 0.75 }}>
-//           <MdOutlineKeyboardTab
-//             style={{ fontSize: "1.5rem", color: "#686868" }}
-//             onClick={() => setCartMenu(false)}
-//           />
-//         </motion.div>
-//         <h6 className="cartTitle">Cart</h6>
-//         <motion.p whileTap={{ scale: 0.75 }} className="clearBtn">
-//           Clear <RiRefreshFill />{" "}
-//         </motion.p>
-//       </div>
-
-//       {/* -----bottom section----- */}
-//       <div className="cartSection">
-//         <ListGroup className="cartItemsContainer">
-//           {/* cart Item */}
-//           <div className="cartItem">
-//             {/* name Section */}
-//             <div className="cartItemName">
-//               <p>Miky's Special Pizza</p>
-//               <p className="cartItemAmount"> QAR 20</p>
-//             </div>
-
-//             {/* button section */}
-//             <div className="cartItemBtns">
-//               <motion.div className="btn" whileTap={{ scale: 0.75 }}>
-//                 <BiMinus style={{ color: "#ffff" }} />
-//               </motion.div>
-//               <p className="cartItemQty">1</p>
-//               <motion.div className="btn" whileTap={{ scale: 0.75 }}>
-//                 <BiPlus style={{ color: "#ffff" }} />
-//               </motion.div>
-//             </div>
-//           </div>
-
-//           <CartItem/>
-//           <CartItem/>
-//           <CartItem/>
-//           <CartItem/>
-//           <CartItem/>
-
-//         </ListGroup>
-//         {/* cart total */}
-
-// <div className="cartTotalContainer">
-//   <div className="cartSubTotal">
-//     <p>Sub Total</p>
-//     <p>QAR 30</p>
-//   </div>
-//   <div className="cartSubTotal">
-//     <p>Delivery</p>
-//     <p>QAR 7</p>
-//   </div>
-//   <div className="divider"></div>
-//   <div className="cartTotal">
-//     <p>Total</p>
-//     <p>QAR 37</p>
-//   </div>
-
-//   {user ? (<motion.button
-//     type="button"
-//     whileTap={{ scale: 0.8 }}
-//     className="checkoutBtn"
-//     onClick={() => setCartMenu(false)}
-//   >
-//     <Link to="/checkout"> Check Out</Link>
-//   </motion.button>) : (<motion.button
-//     type="button"
-//     whileTap={{ scale: 0.8 }}
-//     className="checkoutBtn"
-//     onClick={() => setCartMenu(false)}
-//   >
-//     <Link to="/"> Sign In to Check Out</Link>
-//   </motion.button>)}
-
-// </div>
-//       </div>
-//     </motion.div>
-//   );
-// };
-
-// export default Cart;
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ListGroup } from "reactstrap";
 import { Link } from "react-router-dom";
 import CartItem from "../pages/CartItem";
@@ -112,10 +7,32 @@ import { motion } from "framer-motion";
 import { MdOutlineKeyboardTab } from "react-icons/md";
 import { RiRefreshFill } from "react-icons/ri";
 import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 const Cart = ({ cartMenu, setCartMenu }) => {
-  const [{ user }] = useStateValue();
+  const [{ user, cartItems }, dispatch] = useStateValue();
+  const [itemsCart, setItemsCart] = useState(cartItems);
+  const [total, setTotal] = useState(0);
+  const [flag, setFlag] = useState(1);
 
+  useEffect(() => {
+    let totalPrice = cartItems.reduce(function (accumulator, item) {
+      return accumulator + item.qty * item.price;
+    }, 0);
+    setTotal(totalPrice);
+    // console.log(total)
+  }, [total, flag]);
+
+  const clearCart = () => {
+    dispatch({
+      type: actionType.SET_CARTITEMS,
+      cartItems: [],
+    });
+    localStorage.setItem("cartItems", JSON.stringify([]));
+    setTotal(0);
+    setItemsCart(null);
+  };
+ 
   return (
     <motion.div
       initial={{ opacity: 0, x: 200 }}
@@ -125,64 +42,81 @@ const Cart = ({ cartMenu, setCartMenu }) => {
     >
       <ListGroup className="cart">
         <div className="cartHeader">
-          <motion.div whileTap={{ scale: 0.75 }}>
+          <motion.div
+            className="cartCloseIcon"
+            onClick={() => setCartMenu(false)}
+            whileTap={{ scale: 0.75 }}
+          >
             <MdOutlineKeyboardTab
               style={{ fontSize: "1.5rem", color: "#686868" }}
-              onClick={() => setCartMenu(false)}
+              // onClick={() => setCartMenu(false)}
             />
           </motion.div>
           <h6 className="cartTitle">Your Cart</h6>
-          <motion.p whileTap={{ scale: 0.75 }} className="clearBtn">
+          <motion.p
+            whileTap={{ scale: 0.75 }}
+            className="clearBtn"
+            onClick={clearCart}
+          >
             Clear <RiRefreshFill />{" "}
           </motion.p>
         </div>
 
         <div className="cart__item-list">
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {cartItems &&
+            cartItems?.map((item) => (
+              <CartItem
+                key={item.id}
+                cartItem={item}
+                setFlag={setFlag}
+                flag={flag}
+              />
+            ))}
         </div>
 
         <div className="cartTotalContainer">
           <div className="cartSubTotal">
             <p>Sub Total</p>
-            <p>QAR 30</p>
+            <p>QAR {total}</p>
           </div>
           <div className="cartSubTotal">
             <p>Delivery</p>
-            <p>QAR 7</p>
+            <p>Free</p>
           </div>
           <div className="divider"></div>
           <div className="cartTotal">
             <p>Total</p>
-            <p>QAR 37</p>
+            <p>QAR {total}</p>
           </div>
 
           {user ? (
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.8 }}
-              className="checkoutBtn"
-              onClick={() => setCartMenu(false)}
-            >
-              <Link to="/checkout"> Check Out</Link>
-            </motion.button>
+            <Link to="/checkout">
+              <motion.button
+                className="checkoutBtn"
+                whileTap={{ scale: 0.8 }}
+                onClick={() => setCartMenu(false)}
+                disabled = {total === 0 ? true : false}
+
+                // disabled={cartItems !== null ? true : false}
+              >
+                {/* <button type="button" onClick={() => setCartMenu(false)}> */}
+                Checkout
+                {/* <Link to="/checkout"> Check Out</Link> */}
+                {/* </button> */}
+              </motion.button>
+             
+            </Link>
           ) : (
-            <motion.button
-              type="button"
-              whileTap={{ scale: 0.8 }}
-              className="checkoutBtn"
-              onClick={() => setCartMenu(false)}
-            >
-              <Link to="/"> Sign In to Check Out</Link>
-            </motion.button>
+            <Link to="/">
+              <motion.button
+                type="button"
+                whileTap={{ scale: 0.8 }}
+                className="checkoutBtn"
+                onClick={() => setCartMenu(false)}
+              >
+                Sign In to Check Out
+              </motion.button>
+            </Link>
           )}
         </div>
 

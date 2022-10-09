@@ -9,13 +9,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* base style */
 
 body {
   background: #fcfcfc;
+  padding-right: 0 !important;
+  /* height: 100vh; */
+  /* background-image: url("images/background.jpg");
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover;  */
+  /* background-image: url("../src/images/red-background.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
   font-family: "Istok Web", sans-serif;
+  padding-top: 80px;
+  overflow-x: hidden;
+  overflow-y: auto !important;
 }
 
 h1,
@@ -39,14 +53,10 @@ h2 {
   color: #292930;
 }
 
-section {
-  padding: 60px 0px;
-}
+
 
 @media only screen and (max-width: 768px) {
-  section {
-    padding: 40px 0px;
-  }
+  
 
   h1,
   h2 {

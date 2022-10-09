@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
+import TreeView from "@mui/lab/TreeView";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import TreeItem from "@mui/lab/TreeItem";
 import "../styles/footer.css";
-import footerlogo from "../../images/food-delivery.png";
-import available247 from "../../images/available247.png";
+
 import {
   BsFacebook,
   BsInstagram,
@@ -13,79 +16,21 @@ import {
 const Footer = () => {
   return (
     <footer className="footer">
+      {/* <h1 className="text-center pb-2 text-white">GET IN TOUCH WITH US</h1> */}
+      {/* <section className="mapSection">
+        <div className="mapp__container"></div>
+      </section> */}
       <Container className="mb-4">
         <Row>
-          <Col lg="3" md="4" sm="6">
-            <h4>Our Branches</h4>
-            <hr />
-            <ListGroup className="deliver__time-list">
-              <ListGroupItem className=" branches-item border-0 ps-0">
-                <span>Pearl Qatar</span>
-                <p>44410990 - 55251120 </p>
-              </ListGroupItem>
-
-              <ListGroupItem className=" branches-item border-0 ps-0">
-                <span>Duhail Destination Box</span>
-                <p>33267460</p>
-              </ListGroupItem>
-
-              <ListGroupItem className=" branches-item border-0 ps-0">
-                <span>Qatar Sports Club</span>
-                <p>55999274 - 55999674</p>
-              </ListGroupItem>
-              <ListGroupItem className=" branches-item border-0 ps-0">
-                <span>Lusail Food Arena</span>
-                <p>66992879</p>
-              </ListGroupItem>
-              <ListGroupItem className=" branches-item border-0 ps-0">
-                <span>Royal Plaza</span>
-                <p>44477763 - 33588786</p>
-              </ListGroupItem>
-              <ListGroupItem className=" branches-item border-0 ps-0">
-                <span>ASAS Twin Towers</span>
-                <p>44410993 - 33770383</p>
-              </ListGroupItem>
-            </ListGroup>
-          </Col>
-          {/* <Col lg="3" md="4" sm="6" className="footer-col">
+          <Col lg="12" md="12" sm="12">
+            <h3 className="text-center text-white">
+              Follow us on Social Media
+            </h3>
             <ListGroup>
-              <ListGroupItem className="follow-icons border-0 ps-0">
-                <ul className="socials list-unstyled">
-                  <a href="https://www.facebook.com/mikysdeliminimart/">
-                    <BsFacebook className="icon facebook" />
-                  </a>
-                  <a href="https://www.instagram.com/mikysdeli/?hl=en">
-                    <BsInstagram className="icon" />
-                  </a>
-                  <a href="">
-                    <BsSnapchat className="icon" />
-                  </a>
-                  <a href="https://wa.me/97455251120">
-                    <BsWhatsapp className="icon" />
-                  </a>
-                </ul>
-              </ListGroupItem>
-            </ListGroup>
-          </Col> */}
-          <Col lg="9" md="4" sm="6" className="footer-col">
-            <ListGroup>
-              <ListGroupItem className="w-100 h-100">
-                <div className="map__container text-center">
-                  <h4>Map</h4>
-                  <div className="map">
-                    <div>ok</div>
-                    <div>done</div>
-                    <div>ok</div>
-                    <div>done</div>
-                    <div>ok</div>
-                    <div>done</div>
-                  </div>
-                </div>
-              </ListGroupItem>
               <ListGroupItem className="follow-icons border-0 ps-0 pe-0">
                 <ul className="socials text-center list-unstyled">
                   <a href="https://www.facebook.com/mikysdeliminimart/">
-                    <BsFacebook className="icon facebook" />
+                    <BsFacebook className="icon facebook align-center" />
                   </a>
                   <a href="https://www.instagram.com/mikysdeli/?hl=en">
                     <BsInstagram className="icon" />
@@ -99,6 +44,100 @@ const Footer = () => {
                 </ul>
               </ListGroupItem>
             </ListGroup>
+            <Container className="contactUs__container">
+              <h4 style={{ paddingBottom: "1rem" }}>Contact Us</h4>
+
+              <Row style={{ maxHeight: "6rem" }}>
+                {/* <Col sm={{ size: "auto", offset: 1 }} > */}
+                  <Col lg="4" md="6" sm="6"> 
+                  {" "}
+                  <TreeView
+                    aria-label="file system navigator"
+                    defaultCollapseIcon={<ExpandMoreIcon />}
+                    defaultExpandIcon={<ChevronRightIcon />}
+                    sx={{
+                      height: 80,
+                      flexGrow: 1,
+                      maxWidth: 400,
+                      // overflowY: "auto",
+                    }}
+                  >
+                    <TreeItem nodeId="15" sx={{ pb: 1.5 }} label="Pearl Qatar">
+                      <TreeItem nodeId="1" label="44410990" />
+                      <TreeItem nodeId="2" label="55251120" />
+                    </TreeItem>
+                    <TreeItem
+                      nodeId="3"
+                      sx={{ pb: 1.5 }}
+                      label="Lusail Food Arena"
+                    >
+                      <TreeItem nodeId="4" label="66992879" />
+                    </TreeItem>
+                    {/* <TreeItem
+                      nodeId="11"
+                      sx={{ pb: 2 }}
+                      label="ASAS Twin Towers"
+                    >
+                      <TreeItem nodeId="12" label="44410993" />
+                      
+                    </TreeItem> */}
+                  </TreeView>
+                </Col>
+                {/* <Col sm={{ size: "auto", offset: 1 }}> */}
+                <Col lg="4" md="6" sm="6">
+                  <TreeView
+                    aria-label="file system navigator"
+                    defaultCollapseIcon={<ExpandMoreIcon />}
+                    defaultExpandIcon={<ChevronRightIcon />}
+                    sx={{
+                      height: 80,
+                      flexGrow: 1,
+                      maxWidth: 400,
+                      // overflowY: "auto",
+                    }}
+                  >
+                    <TreeItem
+                      nodeId="5"
+                      sx={{ pb: 1.5}}
+                      label="Duhail Destination Box"
+                      
+                    >
+                      <TreeItem nodeId="6" label="33267460" />
+                    </TreeItem>
+                    <TreeItem
+                      nodeId="7"
+                      sx={{ pb: 1.5 }}
+                      label="Qatar Sports Club"
+                    >
+                      <TreeItem nodeId="8" label="55999674" />
+                    </TreeItem>
+                  </TreeView>
+                </Col>
+                {/* <Col sm={{ size: "auto", offset: 1 }}> */}
+                <Col lg="4" md="6" sm="6">
+                  <TreeView
+                    aria-label="file system navigator"
+                    defaultCollapseIcon={<ExpandMoreIcon />}
+                    defaultExpandIcon={<ChevronRightIcon />}
+                    sx={{
+                      height: 80,
+                      flexGrow: 1,
+                      maxWidth: 400,
+                      // overflowY: "auto",
+                    }}
+                  >
+                    <TreeItem nodeId="5" sx={{ pb: 1.5 }} label="Royal Plaza">
+                      <TreeItem nodeId="6" label="44477763" />
+                      <TreeItem nodeId="13" label="33588786" />
+                    </TreeItem>
+                    <TreeItem nodeId="7" sx={{ pb: 1.5 }} label="Aspire Zone">
+                      <TreeItem nodeId="8" label="55999674" />
+                    </TreeItem>
+                  </TreeView>
+                  
+                </Col>
+              </Row>
+            </Container>
           </Col>
         </Row>
       </Container>

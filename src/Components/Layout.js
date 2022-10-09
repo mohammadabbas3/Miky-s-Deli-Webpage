@@ -3,26 +3,34 @@ import {AnimatePresence} from 'framer-motion'
 import Header from "./Header/Header.jsx";
 import Footer from "./Footer/Footer.jsx";
 import Routes from "../routes/Routers";
+// import Offers from "../Components/UI/Offers"
 // import "..App.css"
 import Area from "../pages/Area"
 
-const Layout = () => {
+import ScrollToTop from "../Components/UI/ScrollToTop"
 
+const Layout = () => {
+// useEffect(()=>{
+//   console.log("useEffect Ran")
+// },[])
 
   return (
+    
     <AnimatePresence>
+      <ScrollToTop/>
     <div>
-      <Area/>
+      {/* <Area/> */}
         <Header />
 
         <div>
         <Routes />
         </div>
 
-        
+      
       <Footer />
     </div>
     </AnimatePresence>
+   
   )
 }
 

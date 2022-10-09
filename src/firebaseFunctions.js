@@ -17,3 +17,12 @@ export const saveItem = async (data) => {
     merge: true,
   });
 };
+
+//get all menu items from firestore
+
+export const getAllMenuItems = async () => {
+  const items = await getDocs(query(collection(firestore, "menuItems"), orderBy("id","desc")));
+  return items.docs.map((doc) => doc.data());
+}
+
+
