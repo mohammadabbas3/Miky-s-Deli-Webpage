@@ -2,10 +2,10 @@ export const actionType = {
   SET_USER: "SET_USER",
   SET_DELIVERYZONE: "SET_DELIVERYZONE",
   SET_MENU_ITEMS: "SET_MENU_ITEMS",
+  SET_CATERINGMENU_ITEMS: "SET_CATERINGMENU_ITEMS",
+  SET_DROPOFFMENU_ITEMS: "SET_DROPOFFMENU_ITEMS",
   SET_CARTITEMS: "SET_CARTITEMS",
   SET_QUANTITY: "SET_QUANTITY",
-  SET_INCREMENT: "SET_INCREMENT",
-  SET_DECREMENT: "SET_DECREMENT",
 };
 
 const reducer = (state, action) => {
@@ -26,6 +26,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         menuItems: action.menuItems,
+      };
+    case actionType.SET_CATERINGMENU_ITEMS:
+      return {
+        ...state,
+        cateringMenuItems: action.cateringMenuItems,
+      };
+    case actionType. SET_DROPOFFMENU_ITEMS:
+      return {
+        ...state,
+        dropoffMenuItems: action.dropoffMenuItems,
       };
     case actionType.SET_CARTITEMS:
       return {

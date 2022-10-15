@@ -13,13 +13,13 @@ const Dashboard = () => {
           <h3>Dashboard</h3>
         </Container>
       </header>
-      <section className="m-4">
+      <section className="mt-4">
         <main>
-          {/* <Col lg='4'> */}
+          <Col lg='2' md='2' className="mt-4">
             <SideBar />
-            <Outlet />
-          {/* </Col> */}
-          
+            
+          </Col>
+          <Outlet />
           
         </main>
       </section>

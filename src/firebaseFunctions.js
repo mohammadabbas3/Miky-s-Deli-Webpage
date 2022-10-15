@@ -25,4 +25,12 @@ export const getAllMenuItems = async () => {
   return items.docs.map((doc) => doc.data());
 }
 
+export const getCateringMenuItems = async () => {
+  const cateringItems = await getDocs(query(collection(firestore, "cateringMenuItems")));
+  return cateringItems.docs.map((doc) => doc.data());
+}
 
+export const getDropoffMenuItems = async () => {
+  const dropoffItems = await getDocs(query(collection(firestore, "dropoffMenuItems")));
+  return dropoffItems.docs.map((doc) => doc.data());
+}

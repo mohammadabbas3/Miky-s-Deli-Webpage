@@ -5,12 +5,12 @@ import "./App.css";
 import { useEffect } from "react";
 import Area from "./pages/Area";
 import { useStateValue } from "./context/StateProvider";
-import { getAllMenuItems } from "./firebaseFunctions";
+import { getAllMenuItems, getCateringMenuItems,getDropoffMenuItems} from "./firebaseFunctions";
 import { actionType } from "./context/reducer";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {
-  const [{ menuItems }, dispatch] = useStateValue();
+  const [{ menuItems, }, dispatch] = useStateValue();
 
   const fetchMenuItems = async () => {
     await getAllMenuItems().then((data) => {
@@ -22,8 +22,30 @@ function App() {
     });
   };
 
+  const fetchCateringMenuItems = async () => {
+    await getCateringMenuItems().then((cateringData) => {
+      console.log(cateringData);
+      dispatch({
+        type: actionType.SET_CATERINGMENU_ITEMS,
+        cateringMenuItems: cateringData,
+      });
+    });
+  };
+
+
+  const fetchDropoffMenuItems = async () => {
+    await getDropoffMenuItems().then((dropoffData) => {
+      console.log(dropoffData);
+      dispatch({
+        type: actionType.SET_DROPOFFMENU_ITEMS,
+        dropoffMenuItems: dropoffData,
+      });
+    });
+  };
+
   useEffect(() => {
-    // console.log('data')
+    fetchDropoffMenuItems();
+    fetchCateringMenuItems();
     fetchMenuItems();
   }, []);
   //  useEffect(()=>{<Area/>},[])

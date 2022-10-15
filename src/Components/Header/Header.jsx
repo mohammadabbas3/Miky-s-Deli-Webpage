@@ -39,12 +39,9 @@ const nav__links = [
   },
   {
     display: "Catering Services",
-    path: "/services",
+    path: "/services/catering",
   },
-  // {
-  //   display: "Contact",
-  //   path: "/contact",
-  // },
+
   {
     display: "Find Us",
     path: "/map",
@@ -196,6 +193,7 @@ const Header = () => {
               ))}
             </div>
           </div>
+          
 
           {/* ======== nav right icons ========= */}
           <div className="nav__right relative d-flex align-items-center gap-4">
@@ -205,8 +203,9 @@ const Header = () => {
                 style={{ color: "#38383a", fontSize: "1.5rem" }}
                 onClick={() => setCartMenu(!cartMenu)}
               />
-              {cartItems && cartItems.length > 0 && <span className="cart__badge">{cartItems.length}</span>}
-              
+              {cartItems && cartItems.length > 0 && (
+                <span className="cart__badge">{cartItems.length}</span>
+              )}
             </span>
 
             <div className="signinBtn">
@@ -253,7 +252,14 @@ const Header = () => {
                       horizontal: "center",
                     }}
                   >
-                    <Link style={{textDecoration:"none", color:"unset", paddingX:"2rem"}} to="/dashboard/profileInfo">
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "unset",
+                        paddingX: "2rem",
+                      }}
+                      to="/dashboard/profileInfo"
+                    >
                       <MenuItem
                         onClick={() => {
                           handleClose();
@@ -273,17 +279,7 @@ const Header = () => {
                     </MenuItem>
                   </Menu>
                 </Box>
-                //<Button
-                // style={{ display: "flex" }}
-                //direction="row-responsive"
-                //className="signout"
-                // onClick={logout}
-                //>
-                //Sign Out
-                //</Button>
-                // {/* </div> */}
               )}
-              {/* <Button style={{display:"flex"}} direction="row-responsive" className='signin' onClick= {toggleModal}>Sign In</Button> */}
 
               {isLogoutMenu && (
                 <div className="overlay">
@@ -386,7 +382,7 @@ const Header = () => {
             {user && user.phoneNumber === "+97430271700" && (
               <span className="adminBtn">
                 {/* Admin Panel{" "} */}
-                <Link to="/admin">
+                <Link to="/admin/orderspage">
                   <img src={adminUser} alt="Admin User" />
                 </Link>
               </span>

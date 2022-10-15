@@ -85,12 +85,12 @@ const CartItem = ({ cartItem, setFlag, flag }) => {
             </span>
           </div>
           
-          <div className="cart__quantityContainer">
+          <div className="catering__quantityContainer">
             <div className=" d-flex align-items-center justify-content-between cartItem-increase__decrease-btns">
               {/* {qty > 1 &&  */}
               <div
                 whileTap={{ scale: 0.75 }}
-                // className="cartItem-decrease__btn disabled"
+               
                 className={`cartItem-decrease__btn ${
                   qty <= 1 ? "disabled" : ""
                 }`}

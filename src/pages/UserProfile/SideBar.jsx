@@ -20,7 +20,7 @@ const routes = [
     icon: <FaUser />,
   },
   {
-    path: "orders",
+    path: "myorders",
     name: "Orders",
     icon: <BsCartCheck />,
   },
@@ -32,7 +32,7 @@ const routes = [
 ];
 
 const SideBar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   const showAnimation = {

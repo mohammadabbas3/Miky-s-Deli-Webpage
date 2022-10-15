@@ -1,21 +1,119 @@
-import React from "react";
-import { Container, Row, Col } from "reactstrap";
-import Helmet from "../Components/Helmet";
-import { useStateValue } from "../context/StateProvider";
-import '../Components/styles/admin.css'
-import { MdAdd } from "react-icons/md";
-import {Link } from "react-router-dom";
-const Admin = () => {
+import React, { useState } from "react";
 
-    const [{ user, cart }] = useStateValue();
+import Helmet from "../Components/Helmet";
+import { AnimatePresence, motion } from "framer-motion";
+
+import "../Components/styles/admin.css";
+import { MdAdd, MdKeyboardBackspace } from "react-icons/md";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { FaBars, FaHome, FaPlus } from "react-icons/fa";
+import { BsCartCheck } from "react-icons/bs";
+import { Col, Container, Row } from "reactstrap";
+
+const routes = [
+  {
+    path: "/",
+    name: "Home",
+    icon: <FaHome />,
+  },
+  {
+    path: "createItem",
+    name: "Add New Product",
+    icon: <FaPlus />,
+  },
+  {
+    path: "orderspage",
+    name: "Orders",
+    icon: <BsCartCheck />,
+  },
+];
+
+const Admin = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const toggle = () => setIsOpen(!isOpen);
+
+  const showAnimation = {
+    hidden: {
+      width: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    show: {
+      opacity: 1,
+      width: "auto",
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
     <Helmet title="Admin">
-      <section>
+      <div className="d-flex">
+        {/* <Col lg="4"className=""> */}
+        <div className="main-container">
+          <motion.div
+            animate={{
+              width: isOpen ? "200px" : "45px",
+
+              transition: {
+                duration: 0.3,
+                type: "spring",
+                damping: 8,
+              },
+            }}
+            className={`sidebar `}
+          >
+            <div className="top_section">
+              {!isOpen ? (
+                <div className="bars">
+                  <FaBars onClick={toggle} />
+                </div>
+              ) : (
+                <div className="bars">
+                  <MdKeyboardBackspace onClick={toggle} />
+                </div>
+              )}
+            </div>
+
+            <section className="routes">
+              {routes.map((route, index) => {
+                return (
+                  <NavLink
+                    to={route.path}
+                    key={index}
+                    className="link"
+                    activeclassname="active"
+                  >
+                    <div className="icon">{route.icon}</div>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          // variants={showAnimation}
+                          initial="hidden"
+                          animate="show"
+                          exit="hidden"
+                          className="link_text"
+                        >
+                          {route.name}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </NavLink>
+                );
+              })}
+            </section>
+          </motion.div>
+        </div>
+
+        {/* <section>
         <Container>
           <Row>
-            <Col lg= '2' md={{ span: 4, offset: 4 }}>
-              <div className="addItemContainer" >
-              <Link to={"/createItem"}>
+            <Col lg="2" md={{ span: 4, offset: 4 }}>
+              <div className="addItemContainer">
+                <Link to={"/createItem"}>
                   <button className="mt-3 btn newItem">
                     Add New Item to the Menu{" "}
                     <span>
@@ -25,41 +123,14 @@ const Admin = () => {
                 </Link>
               </div>
             </Col>
-            <Col lg="12">
-              <table className="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Customer ID</th>
-                    <th>Item Title</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Comments</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* {cartItems.map((item) => (
-                    <Tr item={item} key={item.id} />
-                  ))} */}
-                </tbody>
-              </table>
-
-              {/* total section */}
-              <div className=" total mt-4">
-                <h6>
-                  Subtotal: QAR
-                  <span className="cart__subtotal">SubAmount</span>
-                </h6>
-                <h6>
-                  Delivery:
-                  <span className="cart__subtotal">Free</span>
-                </h6>
-                
-              </div>
-            </Col>
           </Row>
-          
         </Container>
-      </section>
+      </section> */}
+        {/* </Col> */}
+        <div className="admin_outlet">
+          <Outlet />
+        </div>
+      </div>
     </Helmet>
   );
 };

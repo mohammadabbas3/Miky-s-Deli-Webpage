@@ -1,0 +1,21 @@
+.counter input {
+  max-width: 1.5rem;
+  min-width: 1.5rem;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+
+  display: inline-block;
+  text-align: center;
+  border: none !important;
+  background: transparent;
+  color: inherit;
+
+  font-size: inherit;
+
+  line-height: 1;
+}
+
+.counter input:focus {
+  outline-width: 0;
+}

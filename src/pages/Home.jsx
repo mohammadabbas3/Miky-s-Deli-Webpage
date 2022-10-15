@@ -291,7 +291,7 @@ const Home = () => {
             </Row>
           </Container>
 
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 309">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1238 308">
             <path
               fill="#fff"
               fillOpacity="1"

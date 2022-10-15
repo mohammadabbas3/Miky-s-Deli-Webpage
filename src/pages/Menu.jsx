@@ -140,19 +140,6 @@ const Menu = () => {
   };
 
   const searchedItem = () => {
-    // items?.filter((item) => {
-    //   item.title
-    //     .toLowerCase()
-    //     .includes(wordEntered)
-    //     .map((item) => <ProductCard key={item.id} data={item} />);
-    //   console.log(item.includes(wordEntered.toLowerCase())).
-    // });
-    //  menuItems?.filter((item) =>
-    //   item.title
-    //     .toLowerCase()
-    //     .includes(wordEntered)
-    //     .map((item) => <ProductCard key={item.id} data={item} />)
-    // );
     if (wordEntered.length === 0 || wordEntered.length > 2)
       setSearchItems(
         menuItems?.filter(
@@ -303,7 +290,7 @@ const Menu = () => {
           className="my-4 mx-auto justify-content-around"
         >
           {/* {<ProductCard data={items} /> || <CardSkeleton cards={items.length}/>} */}
-          {/* {isLoading && <CardSkeleton cards={items?.length} />} */}
+          {isLoading && <CardSkeleton cards={items?.length} />}
           {/* <CardSkeleton cards={items?.length}/> */}
           {wordEntered === "" ? (
             <ProductCard data={items} />

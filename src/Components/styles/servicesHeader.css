@@ -1,0 +1,61 @@
+.links {
+  
+  background: #fff;
+
+  height: 70px;
+}
+.links > a {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #38383a;
+  transition: 0.3s;
+  text-decoration: none;
+  text-align: center;
+
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.links img {
+  width: 8rem;
+}
+
+.links .active{
+  border-bottom: 2px solid #d20202;
+}
+
+.links > a:first-child {
+  min-width: 60px;
+  width: 160px;
+  margin: 10px;
+  height: 5rem;
+}
+
+.links > a:first-child:hover {
+  border: none;
+}
+
+.links > a:hover {
+  /* background: #ffffff06; */
+  color: #38383a;
+  opacity: 1;
+  border-bottom: 2px solid #d20202;
+}
+
+/* The Magic */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 201;
+  /* height: 45px; */
+}
+.links {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* grid-template-columns: repeat(var(--items), 1fr); */
+  position: relative;
+}

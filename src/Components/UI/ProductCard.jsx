@@ -10,6 +10,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Card } from "reactstrap";
 import { useStateValue } from "../../context/StateProvider";
 import { actionType } from "../../context/reducer";
 import { Troubleshoot } from "@mui/icons-material";
+import { connectStorageEmulator } from "firebase/storage";
 
 const ProductCard = ({ data }) => {
   const [modal, setModal] = useState(false);
@@ -107,7 +108,7 @@ const ProductCard = ({ data }) => {
     // setproductQty(productQty - 1);
     // return productQty;
   };
-console.log(modalInfo.qty)
+// console.log(modalInfo.qty)
   // const handleMeatOptionsChange = (event) => {
   //   const { value, checked } = event.target;
   //   console.log(`${value} is ${checked}`);
@@ -149,9 +150,12 @@ console.log(modalInfo.qty)
       modalInfo.price = parseFloat(modalInfo.price) - parseFloat(option.price)
     }
     
+    addAddons(modalInfo)
     
   };
-
+const addAddons = (selectedItem) => {
+  console.log(selectedItem.variations.map(item => item.addOns))
+}
   console.log(addons);
   return (
     <>

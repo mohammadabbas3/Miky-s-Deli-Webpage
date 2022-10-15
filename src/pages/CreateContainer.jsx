@@ -142,23 +142,23 @@ const sizes = [
 
 // ]
 
-const meatOptions = [
-  {
-    id: 1,
-    name: "Chicken",
-    urlParamName: "chicken",
-  },
-  {
-    id: 2,
-    name: "beef",
-    urlParamName: "beef",
-  },
-  {
-    id: 3,
-    name: "Shrimp",
-    urlParamName: "shrimp",
-  },
-];
+// const meatOptions = [
+//   {
+//     id: 1,
+//     name: "Chicken",
+//     urlParamName: "chicken",
+//   },
+//   {
+//     id: 2,
+//     name: "beef",
+//     urlParamName: "beef",
+//   },
+//   {
+//     id: 3,
+//     name: "Shrimp",
+//     urlParamName: "shrimp",
+//   },
+// ];
 
 const CreateContainer = () => {
   const [{menuItems}, dispatch] = useStateValue();
@@ -319,10 +319,10 @@ const CreateContainer = () => {
 
   return (
     <Helmet tittle="CreateContainer">
-      <section>
+      <section className="d-flex flex-column align-items-center">
         <h3>Add new items to the Menu</h3>
-        <Container>
-          <Row>
+        {/* <Container> */}
+          {/* <Row> */}
             <Col lg="6" md="6" sm="12" className="m-auto text-center">
               <AnimatePresence>
                 <form>
@@ -498,8 +498,8 @@ const CreateContainer = () => {
                 </form>
               </AnimatePresence>
             </Col>
-          </Row>
-        </Container>
+          {/* </Row> */}
+        {/* </Container> */}
       </section>
     </Helmet>
   );
